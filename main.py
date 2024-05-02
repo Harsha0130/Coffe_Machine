@@ -4,7 +4,7 @@ MENU = {
             "water": 50,
             "coffee": 18,
         },
-        "cost": 1.5,
+        "cost": 10,
     },
     "latte": {
         "ingredients": {
@@ -12,7 +12,7 @@ MENU = {
             "milk": 150,
             "coffee": 24,
         },
-        "cost": 2.5,
+        "cost": 15,
     },
     "cappuccino": {
         "ingredients": {
@@ -20,7 +20,7 @@ MENU = {
             "milk": 100,
             "coffee": 24,
         },
-        "cost": 3.0,
+        "cost": 12,
     }
 }
 
@@ -32,11 +32,21 @@ resources = {
 }
 
 def is_resources_sufficient(order_ingredients):
+    """Returns True when order can be made, False when there is sufficient in resources"""
     for item in order_ingredients:
         if order_ingredients[item] >= resources[item]:
             print(f"Sorry there is no enough {item}")
             return False
     return True
+
+def coin_process():
+    """Returns the total calculated from inserted coins"""
+    print("Please enter coins!")
+    total = int(input("How many 1 rupee coins?: ")) * 1
+    total += int(input("How many 2 rupee coins?: ")) * 2
+    total += int(input("How many 5 rupee coins?: ")) * 5
+    total += int(input("How many 10 rupee coins?: ")) * 10
+    return total
 
 
 is_on = True
@@ -52,5 +62,5 @@ while is_on:
     else:
         drink = MENU[choice]
         if is_resources_sufficient(drink["ingredients"]):
-            print("done req 4")
+            payment = coin_process()
 
