@@ -48,6 +48,19 @@ def coin_process():
     total += int(input("How many 10 rupee coins?: ")) * 10
     return total
 
+def is_transaction_sucessful(money_received, drink_cost):
+    """Return True when payment is accepted , False when money is insufficient"""
+    if money_received >= drink_cost:
+        change = money_received - drink_cost
+        print(f"Here is your change {change}")
+        global profit
+        profit += drink_cost
+        return True
+    else:
+        print("Sorry that's not the money, Money refunded")
+        return False
+
+
 
 is_on = True
 while is_on:
@@ -63,4 +76,5 @@ while is_on:
         drink = MENU[choice]
         if is_resources_sufficient(drink["ingredients"]):
             payment = coin_process()
+            is_transaction_sucessful(payment, drink["cost"])
 
